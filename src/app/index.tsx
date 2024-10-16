@@ -1,10 +1,10 @@
-import { Text, View, StyleSheet, ImageBackground, Image } from "react-native"
+import { Text, View, StyleSheet, ImageBackground } from "react-native"
 import { LinearGradient } from 'expo-linear-gradient';
 import { APP_COLOR } from "@/utils/constant";
 import ShareButton from "@/components/share.button";
 import bg from "@/assets/auth/welcome-background.png"
-import fbLogo from '@/assets/auth/facebook.png';
-import ggLogo from '@/assets/auth/google.png';
+import { Link, Redirect } from "expo-router";
+import SocialButton from "@/components/button/social.button";
 
 
 const styles = StyleSheet.create({
@@ -16,15 +16,17 @@ const styles = StyleSheet.create({
         flex: 0.6,
         alignItems: "flex-start",
         justifyContent: "center",
-        paddingLeft: 20
+        paddingLeft: 20,
+        top: 60
     },
     welcomeBtn: {
         flex: 0.4,
-        gap: 20
+        gap: 30
     },
     heading: {
-        fontSize: 40,
+        fontSize: 60,
         fontWeight: "600",
+        color: "#0068b7"
     },
     body: {
         fontSize: 30,
@@ -48,7 +50,15 @@ const styles = StyleSheet.create({
         textTransform: "uppercase"
     }
 })
+
 const WelcomePage = () => {
+
+    if (true) {
+        return (
+            <Redirect href={"/(auth)/regisPhone"} />
+        )
+    }
+
     return (
         <ImageBackground
             style={{ flex: 1 }}
@@ -56,7 +66,7 @@ const WelcomePage = () => {
         >
             <LinearGradient
                 style={{ flex: 1 }}
-                colors={['transparent', '#191B2F']}
+                colors={['transparent', '#51576d']}
                 locations={[0.2, 0.8]}
 
             >
@@ -68,57 +78,12 @@ const WelcomePage = () => {
                         <Text style={styles.body}>
                             Shop Food
                         </Text>
-                        <Text style={styles.footer}>
-                            Nền tảng giao đồ ăn trực tuyến hàng đầu Việt Nam
-                        </Text>
                     </View>
                     <View style={styles.welcomeBtn}>
-                        <View style={{
-                            borderBottomWidth: 1,
-                            borderBottomColor: 'green',
-                            marginHorizontal: 50,
-                        }}>
-                            <Text style={{
-                                textAlign: "center",
-                                padding: 10,
-                                backgroundColor: "white",
-                                alignSelf: "center",
-                                position: 'relative',
-                                top: 20,
-                            }}>
-                                Đăng nhập với
-                            </Text>
-                        </View>
-
-                        <View style={{
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            gap: 30
-                        }}>
-                            <ShareButton
-                                title="Facebook"
-                                onPress={() => { }}
-                                textStyle={{ textTransform: "lowercase" }}
-                                pressStyle={{ alignSelf: "stretch" }}
-                                buttonStyle={{ justifyContent: "center", borderRadius: 30, backgroundColor: "#fff", }}
-                                icon={
-                                    <Image source={fbLogo} />
-                                }
-                            />
-                            <ShareButton
-                                title="Google"
-                                onPress={() => { }}
-                                textStyle={{ textTransform: "lowercase" }}
-                                pressStyle={{ alignSelf: "stretch" }}
-                                buttonStyle={{ justifyContent: "center", borderRadius: 30, backgroundColor: "#fff", paddingHorizontal: 20 }}
-                                icon={
-                                    <Image source={ggLogo} />
-                                }
-                            />
-                        </View>
+                        <SocialButton />
                         <View>
                             <ShareButton
-                                title="Đăng nhập với email"
+                                title="Login with email"
                                 onPress={() => { }}
                                 textStyle={{ color: "#fff", paddingVertical: 5, }}
                                 pressStyle={{ alignSelf: "stretch" }}
@@ -127,17 +92,29 @@ const WelcomePage = () => {
                                     borderRadius: 30,
                                     backgroundColor: "#2c2c2c",
                                     paddingVertical: 10,
-                                    marginHorizontal: 50
+                                    marginHorizontal: 50,
+                                    borderColor: "#505050",
+                                    borderWidth: 1
                                 }}
 
                             /></View>
-                        <View>
-                            <Text
-                                style={{
-                                    textAlign: "center",
+                        <View style={{
+                            flexDirection: 'row',
+                            justifyContent: "center",
+                            gap: 10,
+                        }}>
+                            <Text style={{
+                                color: "white",
+                            }}
+                            >Do you have an account?
+                            </Text>
+                            <Link href={"/(auth)/signUp"}>
+                                <Text style={{
                                     color: "white",
-                                }}
-                            >Chưa có tài khoản? Đăng ký.</Text>
+                                    textDecorationLine: "underline"
+                                }}>Register.
+                                </Text>
+                            </Link>
                         </View>
                     </View>
                 </View>

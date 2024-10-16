@@ -1,12 +1,13 @@
-import SocialButton from "@/components/button/social.button";
-import ShareInput from "@/components/input/share.input";
 import ShareButton from "@/components/share.button";
-import { registerAPI } from "@/utils/api";
+import { View, Text, StyleSheet } from "react-native"
 import { APP_COLOR } from "@/utils/constant";
-import { router, Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ShareInput from "@/components/input/share.input";
+import SocialButton from "@/components/button/social.button";
 import { useState } from "react";
-import { View, Text, SafeAreaView, StyleSheet } from "react-native"
-import Toast from "react-native-root-toast";
+import { registerAPI } from "@/utils/api";
+import Toast from 'react-native-root-toast';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,37 +23,46 @@ const styles = StyleSheet.create({
     },
 })
 
-const LoginPage = () => {
+const SignUpPage = () => {
+    const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const handleSignUp = async () => {
-        // try {
-        //     const res = await registerAPI(email, password);
-        //     if (res.data) {
-        //         router.navigate("/(auth)/verify")
-        //     } else {
-        //         const m = Array.isArray(res.message)
-        //             ? res.message[0] : res.message;
+        try {
+            const res = await registerAPI(email, password, name);
+            if (res.data) {
+                router.navigate("/(auth)/verify")
+            } else {
+                const m = Array.isArray(res.message)
+                    ? res.message[0] : res.message;
 
-        //         Toast.show(m, {
-        //             duration: Toast.durations.LONG,
-        //             textColor: "white",
-        //             backgroundColor: APP_COLOR.BLUE,
-        //             opacity: 1
-        //         });
+                Toast.show(m, {
+                    duration: Toast.durations.LONG,
+                    textColor: "white",
+                    backgroundColor: APP_COLOR.BLUE,
+                    opacity: 1
+                });
 
-        //     }
-        //     console.log(">>> check res: ", res.data)
-        // } catch (error) {
-        //     console.log(">>> check error: ", error)
-        // }
+            }
+            console.log(">>> check res: ", res.data)
+        } catch (error) {
+            console.log(">>> check error: ", error)
+        }
+
+
     }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <Text style={styles.heading}>LOGIN</Text>
+                <Text style={styles.heading}>SIGN UP</Text>
+                <ShareInput
+                    title="Full name"
+                    value={name}
+                    setValue={setName}
+
+                />
                 <ShareInput
                     title="Email"
                     keyboardType="email-address"
@@ -65,17 +75,8 @@ const LoginPage = () => {
                     value={password}
                     setValue={setPassword}
                 />
-                <View style={{ alignItems: "center", marginBottom: 10, marginTop: 25 }}>
-                    <Link href={"/(auth)/signup"}>
-                        <Text style={{
-                            color: "blue",
-                            //textDecorationLine: "underline"
-                        }}>Forgot password?
-                        </Text>
-                    </Link>
-                </View>
                 <ShareButton
-                    title="LOGIN"
+                    title="SIGN UP"
                     onPress={handleSignUp}
                     textStyle={{ color: "#fff", paddingVertical: 5, }}
                     pressStyle={{ alignSelf: "stretch" }}
@@ -97,13 +98,13 @@ const LoginPage = () => {
                     <Text style={{
                         color: "black",
                     }}
-                    >Don't have an account?
+                    >Already have an account?
                     </Text>
-                    <Link href={"/(auth)/signup"}>
+                    <Link href={"/(auth)/login"}>
                         <Text style={{
                             color: "blue",
                             textDecorationLine: "underline"
-                        }}>Sign up.
+                        }}>Login.
                         </Text>
                     </Link>
                 </View>
@@ -114,4 +115,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default SignUpPage;

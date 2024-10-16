@@ -22,9 +22,8 @@ const styles = StyleSheet.create({
     },
 })
 
-const LoginPage = () => {
+const RegisPhonePage = () => {
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
 
     const handleSignUp = async () => {
         // try {
@@ -52,30 +51,16 @@ const LoginPage = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <Text style={styles.heading}>LOGIN</Text>
+                <Text style={styles.heading}>Registration</Text>
+                <Text >Please enter your email to verify your account</Text>
                 <ShareInput
-                    title="Email"
+                    title=""
                     keyboardType="email-address"
                     value={email}
                     setValue={setEmail}
                 />
-                <ShareInput
-                    title="Password"
-                    secureTextEntry={true}
-                    value={password}
-                    setValue={setPassword}
-                />
-                <View style={{ alignItems: "center", marginBottom: 10, marginTop: 25 }}>
-                    <Link href={"/(auth)/signup"}>
-                        <Text style={{
-                            color: "blue",
-                            //textDecorationLine: "underline"
-                        }}>Forgot password?
-                        </Text>
-                    </Link>
-                </View>
                 <ShareButton
-                    title="LOGIN"
+                    title="SEND"
                     onPress={handleSignUp}
                     textStyle={{ color: "#fff", paddingVertical: 5, }}
                     pressStyle={{ alignSelf: "stretch" }}
@@ -89,29 +74,10 @@ const LoginPage = () => {
                         borderWidth: 1
                     }}
                 />
-                <View style={{
-                    flexDirection: 'row',
-                    justifyContent: "center",
-                    gap: 10,
-                }}>
-                    <Text style={{
-                        color: "black",
-                    }}
-                    >Don't have an account?
-                    </Text>
-                    <Link href={"/(auth)/signup"}>
-                        <Text style={{
-                            color: "blue",
-                            textDecorationLine: "underline"
-                        }}>Sign up.
-                        </Text>
-                    </Link>
-                </View>
-                <SocialButton />
             </View>
         </SafeAreaView>
 
     )
 }
 
-export default LoginPage;
+export default RegisPhonePage;

@@ -1,3 +1,6 @@
 export const APP_COLOR = {
-    BLUE: "#4578af"
+    BLUE: "#5a65fa",
+    ORANGE: "#f4511e",
+    GREY: "#d0d0d0"
+
 }
