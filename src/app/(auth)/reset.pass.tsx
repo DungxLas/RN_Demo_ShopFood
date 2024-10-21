@@ -1,6 +1,6 @@
 import SocialButton from "@/components/button/social.button";
 import ShareInput from "@/components/input/share.input";
-import ShareButton from "@/components/share.button";
+import ShareButton from "@/components/button/share.button";
 import { registerAPI } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
 import { router, Link } from "expo-router";

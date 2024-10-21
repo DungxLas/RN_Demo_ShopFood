@@ -1,6 +1,6 @@
 import SocialButton from "@/components/button/social.button";
 import ShareInput from "@/components/input/share.input";
-import ShareButton from "@/components/share.button";
+import ShareButton from "@/components/button/share.button";
 import { registerAPI } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
 import { router, Link } from "expo-router";
@@ -66,7 +66,7 @@ const LoginPage = () => {
                     setValue={setPassword}
                 />
                 <View style={{ alignItems: "center", marginBottom: 10, marginTop: 25 }}>
-                    <Link href={"/(auth)/signup"}>
+                    <Link href={"/(auth)/signUp"}>
                         <Text style={{
                             color: "blue",
                             //textDecorationLine: "underline"
@@ -99,7 +99,7 @@ const LoginPage = () => {
                     }}
                     >Don't have an account?
                     </Text>
-                    <Link href={"/(auth)/signup"}>
+                    <Link href={"/(auth)/signUp"}>
                         <Text style={{
                             color: "blue",
                             textDecorationLine: "underline"

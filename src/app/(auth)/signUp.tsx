@@ -1,4 +1,4 @@
-import ShareButton from "@/components/share.button";
+import ShareButton from "@/components/button/share.button";
 import { View, Text, StyleSheet } from "react-native"
 import { APP_COLOR } from "@/utils/constant";
 import { Link, router } from "expo-router";
@@ -32,7 +32,12 @@ const SignUpPage = () => {
         try {
             const res = await registerAPI(email, password, name);
             if (res.data) {
-                router.navigate("/(auth)/verify")
+                router.replace({
+                    pathname: "/(auth)/verify",
+                    params: {
+                        email: email
+                    }
+                })
             } else {
                 const m = Array.isArray(res.message)
                     ? res.message[0] : res.message;
@@ -49,8 +54,6 @@ const SignUpPage = () => {
         } catch (error) {
             console.log(">>> check error: ", error)
         }
-
-
     }
 
     return (

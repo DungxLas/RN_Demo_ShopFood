@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, ImageBackground } from "react-native"
 import { LinearGradient } from 'expo-linear-gradient';
 import { APP_COLOR } from "@/utils/constant";
-import ShareButton from "@/components/share.button";
+import ShareButton from "@/components/button/share.button";
 import bg from "@/assets/auth/welcome-background.png"
 import { Link, Redirect } from "expo-router";
 import SocialButton from "@/components/button/social.button";
@@ -55,7 +55,7 @@ const WelcomePage = () => {
 
     if (true) {
         return (
-            <Redirect href={"/(auth)/regisPhone"} />
+            <Redirect href={"/(auth)/signUp"} />
         )
     }
 
