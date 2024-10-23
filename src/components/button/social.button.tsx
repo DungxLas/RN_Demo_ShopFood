@@ -1,13 +1,13 @@
 import { View, Image } from "react-native";
 import ShareButton from "./share.button";
-import TextBetweenLine from "../text.between.line";
+import TextBetweenLine from "./text.between.line";
 import fbLogo from '@/assets/auth/facebook.png';
 import ggLogo from '@/assets/auth/google.png';
 
 const SocialButton = () => {
     return (
         <View style={{ gap: 30 }}>
-            <TextBetweenLine title="Login with" />
+            <TextBetweenLine title="Login with" textColor="black" />
             <View style={{
                 flexDirection: "row",
                 justifyContent: "center",
@@ -18,8 +18,8 @@ const SocialButton = () => {
                     onPress={() => { }}
                     textStyle={{ textTransform: "lowercase" }}
                     pressStyle={{ alignSelf: "stretch" }}
-                    buttonStyle={{ justifyContent: "center", borderRadius: 30, backgroundColor: "#fff", }}
-                    icon={
+                    btnStyle={{ justifyContent: "center", borderRadius: 30, backgroundColor: "#fff", }}
+                    icons={
                         <Image source={fbLogo} />
                     }
                 />
@@ -28,8 +28,8 @@ const SocialButton = () => {
                     onPress={() => { }}
                     textStyle={{ textTransform: "lowercase" }}
                     pressStyle={{ alignSelf: "stretch" }}
-                    buttonStyle={{ justifyContent: "center", borderRadius: 30, backgroundColor: "#fff", paddingHorizontal: 20 }}
-                    icon={
+                    btnStyle={{ justifyContent: "center", borderRadius: 30, backgroundColor: "#fff", paddingHorizontal: 20 }}
+                    icons={
                         <Image source={ggLogo} />
                     }
                 />

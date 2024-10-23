@@ -1,11 +1,12 @@
-import { Text, View, StyleSheet, ImageBackground } from "react-native"
+import { Text, View, StyleSheet, ImageBackground, Image } from "react-native"
 import { LinearGradient } from 'expo-linear-gradient';
 import { APP_COLOR } from "@/utils/constant";
 import ShareButton from "@/components/button/share.button";
 import bg from "@/assets/auth/welcome-background.png"
-import { Link, Redirect } from "expo-router";
-import SocialButton from "@/components/button/social.button";
-
+import { Link, Redirect, router } from "expo-router";
+import TextBetweenLine from "@/components/button/text.between.line";
+import fbLogo from '@/assets/auth/facebook.png';
+import ggLogo from '@/assets/auth/google.png';
 
 const styles = StyleSheet.create({
     container: {
@@ -53,11 +54,11 @@ const styles = StyleSheet.create({
 
 const WelcomePage = () => {
 
-    if (true) {
-        return (
-            <Redirect href={"/(auth)/signUp"} />
-        )
-    }
+    // if (true) {
+    //     return (
+    //         <Redirect href={"/(auth)/signUp"} />
+    //     )
+    // }
 
     return (
         <ImageBackground
@@ -80,14 +81,49 @@ const WelcomePage = () => {
                         </Text>
                     </View>
                     <View style={styles.welcomeBtn}>
-                        <SocialButton />
+                        <TextBetweenLine title="Login with" />
+                        <View style={{
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            gap: 30
+                        }}>
+                            <ShareButton
+                                title="faceBook"
+                                onPress={() => { alert("me") }}
+                                textStyle={{ textTransform: "uppercase" }}
+                                btnStyle={{
+                                    justifyContent: "center",
+                                    borderRadius: 30,
+                                    backgroundColor: "#fff"
+                                }}
+                                icons={
+                                    <Image source={fbLogo} />
+                                }
+                            />
+
+                            <ShareButton
+                                title="google"
+                                onPress={() => { alert("me") }}
+                                textStyle={{ textTransform: "uppercase" }}
+                                btnStyle={{
+                                    justifyContent: "center",
+                                    borderRadius: 30,
+                                    paddingHorizontal: 20,
+                                    backgroundColor: "#fff"
+                                }}
+                                icons={
+                                    <Image source={ggLogo} />}
+                            />
+                        </View>
                         <View>
                             <ShareButton
                                 title="Login with email"
-                                onPress={() => { }}
+                                onPress={() => {
+                                    router.navigate("/(auth)/login")
+                                }}
                                 textStyle={{ color: "#fff", paddingVertical: 5, }}
                                 pressStyle={{ alignSelf: "stretch" }}
-                                buttonStyle={{
+                                btnStyle={{
                                     justifyContent: "center",
                                     borderRadius: 30,
                                     backgroundColor: "#2c2c2c",

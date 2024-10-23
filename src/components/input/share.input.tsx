@@ -25,8 +25,9 @@ interface IProps {
     keyboardType?: KeyboardTypeOptions
     secureTextEntry?: boolean
     value: any;
-    setValue: (v: any) => void;
-
+    onChangeText?: any;
+    onBlur?: any;
+    errors?: any;
 }
 const ShareInput = (props: IProps) => {
     const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -37,34 +38,47 @@ const ShareInput = (props: IProps) => {
         setIsShowPassword(secureTextEntry)
     }, [])
 
-    const { title,
+    const {
+        title,
         keyboardType,
         secureTextEntry = false,
         value,
-        setValue,
+        //setValue,
+        onChangeText,
+        onBlur,
+        errors
     } = props;
 
     return (
         <View style={styles.inputGroup}>
             {title && <Text style={styles.text}>{title}</Text>}
-            <TextInput
-                value={value}
-                onChangeText={(text) => setValue(text)}
-                onFocus={() => setIsFocus(true)}
-                onBlur={() => setIsFocus(false)}
-                keyboardType={keyboardType}
-                style={[styles.input,
-                { borderColor: isFocus ? APP_COLOR.ORANGE : APP_COLOR.GREY }
-                ]}
-                secureTextEntry={isShowPassword && secureTextEntry}
-            />
-            {secureTextEntry
-                ? <FontAwesome5
-                    name={!isShowPassword ? "eye" : "eye-slash"} size={24}
-                    color="black"
-                    style={{ position: "absolute", right: 15, bottom: 20 }}
-                    onPress={() => { setIsShowPassword(!isShowPassword) }}
-                /> : <></>}
+            <View>
+                <TextInput
+                    value={value}
+                    //onChangeText={(text) => setValue(text)}
+                    onChangeText={onChangeText}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={(e) => {
+                        if (onBlur) {
+                            onBlur(e);
+                        }
+                        setIsFocus(false);
+                    }}
+                    keyboardType={keyboardType}
+                    style={[styles.input,
+                    { borderColor: isFocus ? APP_COLOR.ORANGE : APP_COLOR.GREY }
+                    ]}
+                    secureTextEntry={isShowPassword && secureTextEntry}
+                />
+                {secureTextEntry
+                    ? <FontAwesome5
+                        name={!isShowPassword ? "eye" : "eye-slash"} size={24}
+                        color="black"
+                        style={{ position: "absolute", right: 15, bottom: 15 }}
+                        onPress={() => { setIsShowPassword(!isShowPassword) }}
+                    /> : <></>}
+            </View>
+            {errors && <Text style={{ color: "red" }}>{errors}</Text>}
         </View>
     )
 }
