@@ -1,25 +1,34 @@
-import CustomFlatList from "@/components/CustomFlatList/CustomFlatList";
 import HeaderHome from "@/components/home/header.home";
 import SearchHome from "@/components/home/search.home";
 import TopListHome from "@/components/home/top.list.home";
-import { StyleSheet, View } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useCurrentTheme } from "@/context/app.context";
+import { Button, StyleSheet } from "react-native"
+import CustomFlatList from "@/components/CustomFlatList/CustomFlatList";
+import CollectionHome from "@/components/home/collection.home";
+import React from "react";
 
-const data = Array(10).fill(1);
+
+const data = [
+    { key: 1, name: "Top Quán Rating 5* tuần này", ref: "" },
+    { key: 2, name: "Quán Mới Lên Sàn", ref: "" },
+    { key: 3, name: "Ăn Thỏa Thích, Freeship 0Đ", ref: "" },
+]
+
 
 const HomeTab = () => {
-
+    const { setTheme } = useCurrentTheme();
     return (
-        <SafeAreaView style={styles.container}>
+        <>
+            <Button title="Change context" onPress={() => setTheme('theme update')} />
             <CustomFlatList
                 data={data}
                 style={styles.list}
-                renderItem={() => <View style={styles.item} />}
+                renderItem={({ item }) => <CollectionHome name={item.name} />}
                 HeaderComponent={<HeaderHome />}
                 StickyElementComponent={<SearchHome />}
                 TopListElementComponent={<TopListHome />}
             />
-        </SafeAreaView>
+        </>
     );
 }
 
@@ -39,9 +48,9 @@ const styles = StyleSheet.create({
     },
     item: {
         borderColor: "green",
-        borderWidth: 5,
-        height: 100,
-        marginBottom: 6,
+        borderWidth: 1,
+        height: 250,
+        marginBottom: 10,
         width: "100%"
     },
     list: {
