@@ -143,7 +143,7 @@ const SectionListScroll = () => {
                             }}
                         >
                             <View style={{
-                                borderBottomColor: APP_COLOR.ORANGE,
+                                borderBottomColor: APP_COLOR.BLUE,
                                 borderBottomWidth: item.index === activeMenuIndex ? 2 : 0
                             }}>
                                 <Text style={{

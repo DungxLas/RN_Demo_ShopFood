@@ -54,7 +54,7 @@ const VerifyPage = () => {
             Toast.show(res.message as string, {
                 duration: Toast.durations.LONG,
                 textColor: "white",
-                backgroundColor: APP_COLOR.ORANGE,
+                backgroundColor: APP_COLOR.BLUE,
                 opacity: 1
             });
         }
@@ -98,7 +98,7 @@ const VerifyPage = () => {
                             borderBottomWidth: 1,
                             borderRadius: 5,
                             // @ts-ignore:next-line
-                            color: APP_COLOR.ORANGE
+                            color: APP_COLOR.BLUE
                         }}
                     />
                 </View>

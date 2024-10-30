@@ -66,7 +66,7 @@ const ShareInput = (props: IProps) => {
                     }}
                     keyboardType={keyboardType}
                     style={[styles.input,
-                    { borderColor: isFocus ? APP_COLOR.ORANGE : APP_COLOR.GREY }
+                    { borderColor: isFocus ? APP_COLOR.BLUE : APP_COLOR.GREY }
                     ]}
                     secureTextEntry={isShowPassword && secureTextEntry}
                 />

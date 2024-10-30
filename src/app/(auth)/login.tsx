@@ -40,7 +40,7 @@ const LoginPage = () => {
                 Toast.show(m, {
                     duration: Toast.durations.LONG,
                     textColor: "white",
-                    backgroundColor: APP_COLOR.ORANGE,
+                    backgroundColor: APP_COLOR.BLUE,
                     opacity: 1
                 });
 

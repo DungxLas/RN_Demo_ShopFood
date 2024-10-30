@@ -22,7 +22,7 @@ const HeaderHome = () => {
                 <Entypo
                     name="location-pin"
                     size={20}
-                    color={APP_COLOR.ORANGE}
+                    color={APP_COLOR.BLUE}
                 />
                 <Text>669 Hoàn Kiếm, Hà Nội</Text>
             </View>

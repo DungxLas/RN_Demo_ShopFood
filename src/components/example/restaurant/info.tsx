@@ -6,9 +6,11 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 interface IProps {
     infoHeight: number;
+    restaurant: IRestaurant | null;
 }
+
 const Info = (props: IProps) => {
-    const { infoHeight } = props;
+    const { infoHeight, restaurant } = props;
 
     return (
         <View style={{
@@ -18,21 +20,25 @@ const Info = (props: IProps) => {
             <View style={{ height: 60, margin: 10 }}>
                 <Text style={{ lineHeight: 30, }} numberOfLines={2} ellipsizeMode='tail'>
                     <View>
-                        <Text style={{ color: "white", backgroundColor: APP_COLOR.ORANGE, padding: 0, margin: 0 }}>{`  Yêu thích  `}</Text>
+                        <Text style={{ color: "white", backgroundColor: APP_COLOR.BLUE, padding: 0, margin: 0 }}>{`  Yêu thích  `}</Text>
                     </View>
                     <Text>{` `}</Text>
-                    <Ionicons name="shield-checkmark" size={20} color="orange" />
-                    <Text style={{ fontSize: 20, fontWeight: "600" }}> Mì cay ăn vặt - hỏi dân it Trái Cây Sạch & Đồ Ăn Vặt</Text>
+                    <Ionicons name="shield-checkmark" size={20} color=" BLUE" />
+                    <Text>{` `}</Text>
+                    <Text style={{ fontSize: 20, fontWeight: "600" }}>
+                        {restaurant?.name}
+                    </Text>
+
                 </Text>
             </View>
             <View style={{ marginHorizontal: 10, marginBottom: 10, flexDirection: "row", justifyContent: "space-between" }}>
                 <View style={{ gap: 10, flexDirection: "row" }}>
                     <View style={{ gap: 3, flexDirection: "row", alignSelf: "flex-start" }}>
-                        <AntDesign name="star" size={15} color="orange" />
-                        <AntDesign name="star" size={15} color="orange" />
-                        <AntDesign name="star" size={15} color="orange" />
-                        <AntDesign name="star" size={15} color="orange" />
-                        <AntDesign name="star" size={15} color="orange" />
+                        <AntDesign name="star" size={15} color=" BLUE" />
+                        <AntDesign name="star" size={15} color=" BLUE" />
+                        <AntDesign name="star" size={15} color=" BLUE" />
+                        <AntDesign name="star" size={15} color=" BLUE" />
+                        <AntDesign name="star" size={15} color=" BLUE" />
                     </View>
                     <Text>5.0 (999+ Bình Luận) </Text>
                 </View>
@@ -54,7 +60,7 @@ const Info = (props: IProps) => {
                             alignItems: "center",
                             backgroundColor: "rgba(255,192,203,0.3)"
                         }}>
-                            <AntDesign name="rocket1" size={25} color={APP_COLOR.ORANGE} />
+                            <AntDesign name="rocket1" size={25} color={APP_COLOR.BLUE} />
                         </View>
                         <View>
                             <Text >Giao hàng tiêu chuẩn</Text>
@@ -62,10 +68,10 @@ const Info = (props: IProps) => {
                     </View>
                     <View style={{ gap: 5 }}>
                         <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
-                            <AntDesign name="gift" size={12} color={APP_COLOR.ORANGE} />
+                            <AntDesign name="gift" size={12} color={APP_COLOR.BLUE} />
                             <Text>Giảm 20% tối đa 55k cho đơn từ 200k</Text></View>
                         <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
-                            <AntDesign name="gift" size={12} color={APP_COLOR.ORANGE} />
+                            <AntDesign name="gift" size={12} color={APP_COLOR.BLUE} />
                             <Text>Mã giảm 25% trên giá món</Text>
                         </View>
                     </View>

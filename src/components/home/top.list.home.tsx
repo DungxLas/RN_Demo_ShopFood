@@ -3,7 +3,7 @@ import BannerHome from "./banner.home";
 
 const styles = StyleSheet.create({
     topList: {
-        borderColor: "orange",
+        borderColor: " BLUE",
         borderWidth: 5,
         minHeight: 100,
         marginBottom: 6,
