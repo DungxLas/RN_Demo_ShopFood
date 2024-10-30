@@ -27,7 +27,7 @@ interface IProps {
     value: any;
     onChangeText?: any;
     onBlur?: any;
-    errors?: any;
+    error?: any;
 }
 const ShareInput = (props: IProps) => {
     const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -46,7 +46,7 @@ const ShareInput = (props: IProps) => {
         //setValue,
         onChangeText,
         onBlur,
-        errors
+        error
     } = props;
 
     return (
@@ -78,7 +78,7 @@ const ShareInput = (props: IProps) => {
                         onPress={() => { setIsShowPassword(!isShowPassword) }}
                     /> : <></>}
             </View>
-            {errors && <Text style={{ color: "red" }}>{errors}</Text>}
+            {error && <Text style={{ color: "red" }}>{error}</Text>}
         </View>
     )
 }

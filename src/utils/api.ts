@@ -1,5 +1,6 @@
 import axios from "@/utils/axios.customize";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const registerAPI = (email: string, password: string, name: string) => {
     const url = `/api/v1/auth/register`;
@@ -18,5 +19,28 @@ export const resendCodeAPI = (email: string) => {
 
 export const loginAPI = (email: string, password: string) => {
     const url = `/api/v1/auth/login`;
-    return axios.post<IBackendRes<IRegister>>(url, { username: email, password });
+    return axios.post<IBackendRes<IUserLogin>>(url, { username: email, password });
 }
+
+export const getAccountAPI = () => {
+    const url = `/api/v1/auth/account`;
+    return axios.get<IBackendRes<IUserLogin>>(url);
+} 
+
+export const getTopRestaurant = (ref: string) => {
+    const url = `/api/v1/restaurants/${ref}`;
+    return axios.post<IBackendRes<ITopRestaurant[]>>(url);
+
+}
+
+export const printAsyncStorage = () => {
+    AsyncStorage.getAllKeys((err, keys) => {
+        AsyncStorage.multiGet(keys!, (error, stores) => {
+            let asyncStorage: any = {}
+            stores?.map((result, i, store) => {
+                asyncStorage[store[i][0]] = store[i][1]
+            });
+            console.log(JSON.stringify(asyncStorage, null, 2));
+        });
+    });
+};

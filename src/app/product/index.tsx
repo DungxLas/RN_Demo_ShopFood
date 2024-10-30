@@ -1,9 +1,10 @@
-import { Text, View } from "react-native"
+import RMain from "@/components/example/restaurant/main";
+import { View } from "react-native"
 
 const ProductPage = () => {
     return (
-        <View>
-            <Text> Product page</Text>
+        <View style={{ flex: 1 }}>
+            <RMain />
         </View>
     )
 }
