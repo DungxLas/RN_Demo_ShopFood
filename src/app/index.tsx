@@ -1,6 +1,5 @@
-import { Text, View } from "react-native"
 import { router } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAccountAPI } from "@/utils/api";
 import { useCurrentApp } from "@/context/app.context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,6 +11,7 @@ SplashScreen.preventAutoHideAsync();
 
 const RootPage = () => {
     const { setAppState } = useCurrentApp();
+    const [state, setState] = useState<any>();
 
     useEffect(() => {
         async function prepare() {
@@ -29,7 +29,9 @@ const RootPage = () => {
                     router.replace("/(auth)/welcome")
                 }
             } catch (e) {
-                console.warn(e);
+                setState(() => {
+                    throw new Error("No Connect to Backend...")
+                })
             } finally {
                 // Tell the application to render
                 await SplashScreen.hideAsync();
@@ -54,9 +56,7 @@ const RootPage = () => {
     // }
     return (
         <>
-            <View>
-                <Text>Root Page</Text>
-            </View>
+
         </>
     )
 }
