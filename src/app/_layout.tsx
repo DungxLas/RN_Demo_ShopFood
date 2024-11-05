@@ -30,7 +30,7 @@ const RootLayout = () => {
         ...DefaultTheme,
         colors: {
             ...DefaultTheme.colors,
-            background: 'transparent',
+            background: 'white',
         },
     };
 
@@ -75,10 +75,17 @@ const RootLayout = () => {
                                 name="(tabs)"
                                 options={{ headerShown: false }}
                             />
-
                             <Stack.Screen
                                 name="product/[id]"
                                 options={{ headerShown: false }}
+                            />
+                            <Stack.Screen
+                                name="product/create.modal"
+                                options={{
+                                    headerShown: false,
+                                    animation: "fade",
+                                    presentation: "transparentModal",
+                                }}
                             />
                         </Stack>
                     </ThemeProvider>

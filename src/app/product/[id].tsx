@@ -2,14 +2,15 @@ import RMain from "@/components/example/restaurant/main";
 import { getRestaurantByIdAPI } from "@/utils/api";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { Dimensions, Text, View } from "react-native"
+import { Dimensions, View } from "react-native"
 import ContentLoader, { Rect } from "react-content-loader/native"
+import { useCurrentApp } from "@/context/app.context";
 const { height: sHeight, width: sWidth } = Dimensions.get('window');
 
 const ProductPage = () => {
     const { id } = useLocalSearchParams();
-    const [restaurant, setRestaurant] = useState<IRestaurant | null>(null)
     const [loading, setLoading] = useState(true);
+    const { restaurant, setRestaurant } = useCurrentApp()
 
     useEffect(() => {
         const fetchRestaurant = async () => {
@@ -25,12 +26,9 @@ const ProductPage = () => {
     }, [id])
     return (
         <View style={{ flex: 1 }}>
-            {loading === false ?
-                <RMain
-                    restaurant={restaurant}
-                />
-                :
-                <ContentLoader
+            {loading === false
+                ? <RMain />
+                : <ContentLoader
                     speed={2}
                     width={700}
                     height={sHeight}
