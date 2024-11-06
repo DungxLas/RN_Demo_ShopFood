@@ -1,57 +1,113 @@
-import ShareInput from "@/components/input/share.input";
 import { useCurrentApp } from "@/context/app.context";
-import { View, Text, StyleSheet, Image, Platform } from "react-native"
+import { getURLBaseBackend } from "@/utils/api";
+import { APP_COLOR } from "@/utils/constant";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { View, Text, Image, Pressable } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import React from "react";
+import { router } from "expo-router";
 
-const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 15,
-        paddingTop: 50
-    }
-})
+interface IMiniPressProps {
+    iconLabel: React.ReactNode;
+    label: string;
+    onPress?: any | null
+}
+
 const AccountPage = () => {
-    const { theme, appState } = useCurrentApp();
+    const { appState } = useCurrentApp();
+    const baseImage = `${getURLBaseBackend()}/images/avatar`;
+    const insets = useSafeAreaInsets();
 
-    const backend = Platform.OS === "android"
-        ? process.env.EXPO_PUBLIC_ANDROID_API_URL
-        : process.env.EXPO_PUBLIC_IOS_API_URL;
+    function MiniPress(props: IMiniPressProps) {
+        const { iconLabel, label, onPress } = props;
+        return <Pressable
+            onPress={onPress}
+            style={{
+                paddingVertical: 15,
+                paddingHorizontal: 10,
+                borderBottomColor: "#eee",
+                borderBottomWidth: 1,
+                justifyContent: "space-between",
+                flexDirection: "row",
+                alignItems: "center"
+            }}>
+            <View style={{
+                flexDirection: "row",
+                gap: 10,
+                alignItems: "center"
+            }}>
+                {iconLabel}
+                <Text>{label}</Text>
+            </View>
+            <MaterialIcons name="navigate-next" size={24} color="grey" />
+        </Pressable>;
+    }
 
-    const baseImage = `${backend}/images/avatar`;
     return (
-        <View style={styles.container}>
-            <View style={{ alignItems: "center", gap: 5 }}>
+        <View style={{ flex: 1 }}>
+            <View
+                style={{
+                    paddingTop: insets.top,
+                    paddingHorizontal: 20,
+                    paddingBottom: 20,
+                    backgroundColor: APP_COLOR.BLUE,
+                    flexDirection: "row",
+                    gap: 20,
+                    alignItems: "center"
+
+                }}
+            >
                 <Image
-                    style={{ height: 150, width: 150 }}
+                    style={{ height: 60, width: 60 }}
                     source={{ uri: `${baseImage}/${appState?.user.avatar}` }}
                 />
-                <Text>{appState?.user.name}</Text>
+                <View>
+                    <Text style={{ color: "white", fontSize: 20 }}>
+                        {appState?.user.name}
+                    </Text>
+                </View>
             </View>
-            <View style={{ marginTop: 20, gap: 20 }}>
-                <ShareInput
-                    title="Họ tên"
-                    // onChangeText={handleChange('name')}
-                    // onBlur={handleBlur('name')}
-                    // value={values.name}
-                    // error={errors.name}
-                    value={appState?.user.name}
-                />
-                <ShareInput
-                    title="Email"
-                    keyboardType="email-address"
-                    // onChangeText={handleChange('email')}
-                    // onBlur={handleBlur('email')}
-                    // value={values.email}
-                    // error={errors.email}
-                    value={appState?.user.email}
-                />
-
-                <ShareInput
-                    title="Số điện thoại"
-                    // onChangeText={handleChange('name')}
-                    // onBlur={handleBlur('name')}
-                    // value={values.name}
-                    // error={errors.name}
-                    value={appState?.user.phone}
-                />
+            <MiniPress
+                iconLabel={<Feather name="user-check" size={20} color="green" />}
+                label="Update info"
+                onPress={() => router.navigate("/(user)/account/info")}
+            />
+            <MiniPress
+                iconLabel={<MaterialIcons name="password" size={20} color="green" />}
+                label="Change password"
+            />
+            <MiniPress
+                iconLabel={<MaterialIcons name="language" size={20} color="green" />}
+                label="Language"
+            />
+            <MiniPress
+                iconLabel={<MaterialIcons name="info-outline" size={20} color="green" />}
+                label="About app"
+            />
+            <View style={{
+                flex: 1,
+                justifyContent: "flex-end",
+                gap: 10,
+                paddingBottom: 15
+            }}>
+                <Pressable
+                    style={({ pressed }) => ({
+                        opacity: pressed === true ? 0.5 : 1,
+                        padding: 10,
+                        marginHorizontal: 10,
+                        backgroundColor: APP_COLOR.BLUE,
+                        borderRadius: 3
+                    })}>
+                    <Text style={{
+                        textAlign: "center",
+                        color: "white"
+                    }}>
+                        Log Out
+                    </Text>
+                </Pressable>
+                <Text style={{ textAlign: "center", color: APP_COLOR.GREY }}>
+                    Version 1.0 - xxx
+                </Text>
             </View>
         </View>
     )
