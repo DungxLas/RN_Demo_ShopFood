@@ -4,6 +4,7 @@ import { Dimensions, Pressable, StyleSheet, TextInput, View } from "react-native
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Animated from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import React from "react";
 
 const AnimatedMaterialIcons = Animated.createAnimatedComponent(MaterialIcons)
 const { height: sHeight, width: sWidth } = Dimensions.get('window');
